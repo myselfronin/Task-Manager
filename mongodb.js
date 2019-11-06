@@ -1,10 +1,18 @@
 //Crud create read update detele
 
-const mongodb = require('mongodb');
-const MongoClient = mongodb.MongoClient;
+// const mongodb = require('mongodb');
+// const MongoClient = mongodb.MongoClient;
+// const ObjectID = mongodb.ObjectID;
+//Destructuring object (which is same as above)
+const { MongoClient, ObjectID} = require('mongodb')
 
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
+
+const id = new ObjectID();
+console.log(id.id.length);
+console.log(id.getTimestamp());
+console.log(id.toHexString().length);
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client) => {
     if(error) {
@@ -13,8 +21,9 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client) => 
     const db = client.db(databaseName);
 
     // db.collection('users').insertOne({
-    //   name: 'Rabinson',
-    //   age: 23
+    //     _id: id,
+    //     name: 'Ronin',
+    //     age: 24
     // },(error, result) => {
     //     if(error){
     //         return console.log('Unable to insert user');
@@ -38,24 +47,24 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client) => 
     //     console.log(result.ops);
     // })
 
-    db.collection('tasks').insertMany([
-        {
-            description: 'Node js tutorial',
-            completed: false
-        }, {
-            description: 'Vue js tutorial',
-            completed: false
-        }, {
-            description: 'Attar Logo Design',
-            completed: true
-        }
-    ],(error, result) => {
-        if(error) {
-            return console.log('Unable to insert documents');
-        } else {
-            console.log(result.ops);
-        }
-    })
+    // db.collection('tasks').insertMany([
+    //     {
+    //         description: 'Node js tutorial',
+    //         completed: false
+    //     }, {
+    //         description: 'Vue js tutorial',
+    //         completed: false
+    //     }, {
+    //         description: 'Attar Logo Design',
+    //         completed: true
+    //     }
+    // ],(error, result) => {
+    //     if(error) {
+    //         return console.log('Unable to insert documents');
+    //     } else {
+    //         console.log(result.ops);
+    //     }
+    // })
 });
 
 
