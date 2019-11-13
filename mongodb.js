@@ -9,10 +9,10 @@ const { MongoClient, ObjectID} = require('mongodb')
 const connectionURL = 'mongodb://127.0.0.1:27017';
 const databaseName = 'task-manager';
 
-const id = new ObjectID();
-console.log(id.id.length);
-console.log(id.getTimestamp());
-console.log(id.toHexString().length);
+// const id = new ObjectID();
+// console.log(id.id.length);
+// console.log(id.getTimestamp());
+// console.log(id.toHexString().length);
 
 MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client) => {
     if(error) {
@@ -65,6 +65,31 @@ MongoClient.connect(connectionURL, { useNewUrlParser: true}, (error, client) => 
     //         console.log(result.ops);
     //     }
     // })
+
+    //Update
+    // db.collection('users').updateOne({
+    //     _id: new ObjectID('5dc0ef9b83a6315a01577c5e')
+    // }, {
+    //     $inc: {
+    //         age: 1
+    //     }
+    // }).then((result) => {
+    //     console.log(result);
+    // }).catch((error) => {
+    //     console.log(error)
+    // });
+
+    db.collection('tasks').updateMany({
+        completed: false,
+    },{
+        $set: {
+            completed: true
+        }
+    }).then((result) => {
+        console.log(result);
+    }).catch((error) => {
+        console.log(error)
+    })
 });
 
 
