@@ -18,9 +18,23 @@ router.post('/tasks', auth, async (req, res) => {
     }
 });
 
+// GET /tasks?completed=true
 router.get('/tasks', auth, async (req, res) => {
+    const match = {} ;
+
+    if(req.query.completed) {
+        match.completed = req.query.completed === 'true'
+    }
+
     try {
-        await req.user.populate('tasks').execPopulate();
+        await req.user.populate({
+            path: 'tasks',
+            match,
+            options: {
+                limit: parseInt(req.query.limit),
+                skip: parseInt(req.query.skip),
+            }
+        }).execPopulate();
         res.status(200).send(req.user.tasks);
     } catch(e)  {
         res.status(400).send(e)

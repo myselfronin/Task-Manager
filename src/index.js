@@ -17,11 +17,11 @@ const main = async  () => {
     // await task.populate('owner').execPopulate()
     // console.log(task.owner)
 
-    const user = await User.findById('5df6ef1a7c09b92e87cd57ba');
-    await user.populate('tasks').execPopulate()
-    console.log(user.tasks);
+    // const user = await User.findById('5df6ef1a7c09b92e87cd57ba');
+    // await user.populate('tasks').execPopulate();
+    // console.log(user.tasks);
 };
-main()
+// main()
 app.listen(port, () => {
     console.log('Server is up on port' + port)
 });
